@@ -1,12 +1,25 @@
-<ol>
-  <li>Add a Input field which updates a property ('username') via Two-Way-Binding</li>
-  <li>Output the username property via String Interpolation (in a paragraph below the input)</li>
-  <li>Add a button which may only be clicked if the username is NOT an empty string</li>
-  <li>Upon clicking the button, the username should be reset to an empty string</li>
-</ol>
 
-<input type="text" [(ngModel)]="username">
 
-<p>{{ username }}</p>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+        <ol>
+          <li>Add a Input field which updates a property ('username') via Two-Way-Binding</li>
+          <li>Output the username property via String Interpolation (in a paragraph below the input)</li>
+          <li>Add a button which may only be clicked if the username is NOT an empty string</li>
+          <li>Upon clicking the button, the username should be reset to an empty string</li>
+        </ol>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <label for="username">User Name</label>
+        <input type="text" [(ngModel)]="username">
 
-<button class="btn btn-primary" (click)="username"></button>
+        <p>{{ username }}</p>
+
+        <button class="btn btn-primary" [disabled]="username === ''" (click)="resetUserName()">Reset Username</button>
+    </div>
+  </div>
+</div>
+
