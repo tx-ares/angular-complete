@@ -18,3 +18,5 @@
 
 <p *ngFor="let message of messages" [ngClass]="{afterFifth: currentIndex >= 5 }">{{message}}</p>
 
+<!-- Class doesn't properly add to only the 5th and beyond message, it adds to all... ToDo: Fix that. -->
+
