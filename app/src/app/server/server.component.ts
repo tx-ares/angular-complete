@@ -11,11 +11,15 @@ export class ServerComponent implements OnInit {
   serverStatus: string = 'offline';
 
   constructor() {
-
+    this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
   }
 
   public getServerStatus() {
     return this.serverStatus;
+  }
+
+  public getColor() {
+    return this.serverStatus === 'online' ? 'green' : 'tomato';
   }
 
   ngOnInit() {
