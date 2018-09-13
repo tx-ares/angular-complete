@@ -11,3 +11,10 @@
     </div>
   </div>
 </div>
+
+<button (click)="addMessage()" class="btn btn-primary">Display Details</button>
+
+<p *ngIf="messageVisible">Jago is the raddest ninja.</p>
+
+<p *ngFor="let message of messages" [ngClass]="{afterFifth: currentIndex >= 5 }">{{message}}</p>
+
