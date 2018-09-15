@@ -13,7 +13,8 @@ import { ServersComponent } from './servers/servers.component';
     ServersComponent
   ],
   imports: [
-    BrowserModule, FormsModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
