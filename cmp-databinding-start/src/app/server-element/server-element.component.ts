@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation, OnChanges, SimpleChanges,
-         DoCheck, AfterContentInit, AfterContentChecked, AfterViewChecked, AfterViewInit, OnDestroy } from '@angular/core';
+         DoCheck, AfterContentInit, AfterContentChecked, AfterViewChecked, AfterViewInit,
+         OnDestroy, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -13,6 +14,7 @@ export class ServerElementComponent implements OnInit, OnChanges, OnDestroy,
              DoCheck, AfterContentInit, AfterContentChecked, AfterViewChecked, AfterViewInit {
    // This uses an input alias. The template uses srvElement, but actually binds to 'element' property.
   @Input('srvElement') element: {type: string, name: string, content: string};
+  @ViewChild('heading') header: ElementRef;
 
   constructor() {
     console.log('contructor called');
@@ -23,6 +25,8 @@ export class ServerElementComponent implements OnInit, OnChanges, OnDestroy,
   }
 
   ngOnInit() {
+    console.log('ngOnInit called');
+    console.log('Text Content: ' + this.header.nativeElement.textContent);
   }
 
   ngDoCheck() {
@@ -43,6 +47,7 @@ export class ServerElementComponent implements OnInit, OnChanges, OnDestroy,
 
   ngAfterViewInit() {
    console.log('ngAfterViewInit called');
+   console.log('Text Content: ' + this.header.nativeElement.textContent);
   }
 
   ngOnDestroy() {
