@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewEncapsulation, OnChanges, SimpleChanges,
          DoCheck, AfterContentInit, AfterContentChecked, AfterViewChecked, AfterViewInit,
-         OnDestroy, ViewChild, ElementRef } from '@angular/core';
+         OnDestroy, ViewChild, ElementRef, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -15,6 +15,7 @@ export class ServerElementComponent implements OnInit, OnChanges, OnDestroy,
    // This uses an input alias. The template uses srvElement, but actually binds to 'element' property.
   @Input('srvElement') element: {type: string, name: string, content: string};
   @ViewChild('heading') header: ElementRef;
+  @ContentChild('contentParagraph') paragraph: ElementRef;
 
   constructor() {
     console.log('contructor called');
@@ -27,6 +28,8 @@ export class ServerElementComponent implements OnInit, OnChanges, OnDestroy,
   ngOnInit() {
     console.log('ngOnInit called');
     console.log('Text Content: ' + this.header.nativeElement.textContent);
+    // The below line will be empty.  Content has not been initialized.
+    console.log('Text Content of paragraph: ' + this.paragraph.nativeElement.textContent);
   }
 
   ngDoCheck() {
@@ -35,6 +38,7 @@ export class ServerElementComponent implements OnInit, OnChanges, OnDestroy,
 
   ngAfterContentInit() {
     console.log('ngAfterContentInit called');
+    console.log('Text Content of paragraph: ' + this.paragraph.nativeElement.textContent);
   }
 
   ngAfterContentChecked() {
