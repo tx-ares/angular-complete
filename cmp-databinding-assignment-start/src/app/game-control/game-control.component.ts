@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-game-control',
@@ -6,6 +6,10 @@ import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
   styleUrls: ['./game-control.component.css']
 })
 export class GameControlComponent implements OnInit {
+
+  // My solution did not use events, but it should. Oh well. :o
+  // @Output() intervalFired = new EventEmitter<number>();
+  lastNumber = 0;
 
   counter = 0;
   ref;
