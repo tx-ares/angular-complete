@@ -1,0 +1,13 @@
+.button-container {
+    text-align: center;
+}
+
+.button-container > button {
+    margin: 0 5px;
+}
+
+.even-container,
+.odd-container {
+    text-align: center;
+}
+

@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="counter-container" style="text-align: center; padding: 5px;">
+        {{ counter }}
+      </div>
+      <div class="button-container">
+          <button (click)="onStart()" class="btn btn-primary">Start</button>
+          <button (click)="onPause()" class="btn btn-warning">Pause</button>
+          <button (click)="onReset()" class="btn btn-danger">Reset</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="even-container">
+          <ul>
+            <li *ngFor="let item of evenNumbers"><app-even></app-even></li>
+          </ul>
+      </div>
+    </div>
+    <div class="col-xs-6">
+      <div class="odd-container">
+          <ul>
+              <li *ngFor="let item of oddNumbers"><app-odd></app-odd></li>
+            </ul>
+      </div>
+    </div>
+  </div>
+</div>
