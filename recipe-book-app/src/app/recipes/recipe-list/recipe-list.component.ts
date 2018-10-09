@@ -25,11 +25,7 @@ export class RecipeListComponent implements OnInit {
   ngOnInit() {
   }
 
-  public showRecipeDetail(event) {
-    console.log(event);
-  }
-
-  public notifyParent(recipe: Recipe) {
+  public recipeSelected(recipe: Recipe) {
     this.recipeClicked.emit(recipe);
   }
 }
