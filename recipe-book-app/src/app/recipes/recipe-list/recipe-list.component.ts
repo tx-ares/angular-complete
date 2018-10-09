@@ -7,7 +7,7 @@ import { Recipe } from '../models/recipe.model';
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
-  @Output() recipeClicked = new EventEmitter<{recipeName: string, recipeInfo: string}>();
+  @Output() recipeClicked = new EventEmitter<Recipe>();
 
   public recipes: Recipe[] = [
     new Recipe(
@@ -29,10 +29,7 @@ export class RecipeListComponent implements OnInit {
     console.log(event);
   }
 
-  public notifyParent(recipeData) {
-    this.recipeClicked.emit({
-      recipeName: recipeData.recipeName,
-      recipeInfo: recipeData.recipeInfo
-    });
+  public notifyParent(recipe: Recipe) {
+    this.recipeClicked.emit(recipe);
   }
 }
