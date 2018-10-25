@@ -27,7 +27,7 @@
       </ul>
 
       <p appBasicHighlight>Highlight me!</p>
-      <p appBetterHighlight>Hover over me!</p>
+      <p appBetterHighlight [defaultColor]="'goldenrod'" [highlightColor]="'seagreen'">Hover over me!</p>
       <ng-template [ngIf]="onlyOdd">
         <p>Only odd</p>
       </ng-template>
