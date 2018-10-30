@@ -25,6 +25,17 @@
             </li>
           </div>
       </ul>
+      <ng-template [ngIf]="!onlyOdd">
+        <div>
+          <li 
+            class="list-group-item"
+            [ngClass]="{odd: even %2 !==0}"
+            [ngStyle]="{backgroundColor: odd %2 !==0 ? 'dodgerblue' : 'transparent'}"
+            *ngFor="let even of evenNumbers">
+            {{ even }}
+          </li>
+        </div>
+      </ng-template>
 
       <p appBasicHighlight>Highlight me!</p>
       <p appBetterHighlight [defaultColor]="'goldenrod'" [highlightColor]="'seagreen'">Hover over me!</p>
