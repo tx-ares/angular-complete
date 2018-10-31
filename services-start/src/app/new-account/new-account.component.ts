@@ -6,7 +6,7 @@ import { AccountsService } from '../services/accounts.service';
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.css'],
-  providers: [LoggingService, AccountsService]
+  providers: [LoggingService] // By leaving out the AccountsService we can make sure that we don't create any more instances of the service.  This is important for data consistency across our components.
 })
 export class NewAccountComponent {
 
