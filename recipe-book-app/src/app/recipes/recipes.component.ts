@@ -19,7 +19,7 @@ export class RecipeBookComponent implements OnInit {
       (recipe: Recipe) => {
         this.selectedRecipe = recipe;
       }
-    )
+    );
   }
 
   public showRecipeDetail(recipeData) {
