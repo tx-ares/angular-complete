@@ -6,13 +6,11 @@ import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.css']
+  styleUrls: ['./recipe-detail.component.scss']
 })
 export class RecipeDetailComponent implements OnInit {
 
   @Input() selectedRecipe: Recipe;
-  // @Output() toListIngredients = new EventEmitter<Ingredient[]>();
-
   constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit() {
@@ -20,7 +18,6 @@ export class RecipeDetailComponent implements OnInit {
 
   sendToShoppingList(selectedRecipe: Recipe) {
     console.log(selectedRecipe , ' << sendToShoppingList fired');
-    // this.toListIngredients.emit(selectedRecipe.ingredients);
     selectedRecipe.ingredients.forEach((ingredient) => {
       this.shoppingListService.addIngredient(ingredient);
     });
