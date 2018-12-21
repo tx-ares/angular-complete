@@ -12,23 +12,7 @@ import { EditServerComponent } from './servers/edit-server/edit-server.component
 import { ServerComponent } from './servers/server/server.component';
 import { ServersService } from './servers/servers.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
-const appRoutes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'servers', component: ServersComponent,
-    children: [
-      { path: ':id/edit', component: EditServerComponent},
-      { path: ':id', component: ServerComponent}
-    ]
-  },
-  { path: 'users', component: UsersComponent,
-    children: [
-      { path: ':id/:name', component: UserComponent }
-    ]
-  },
-  { path: 'not-found', component: PageNotFoundComponent },
-  { path: '**', redirectTo: '/not-found' } // catch invalid routes. MUST be last route because routes are parsed in order they're defined.
-];
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -45,8 +29,7 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes) // forRoot will register the routes to the root of the application.
-                                    // Other things can be registered this way, but routes must be registered here.
+    AppRoutingModule
   ],
   providers: [ServersService],
   bootstrap: [AppComponent]
