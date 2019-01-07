@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RecipeBookComponent } from './recipes/recipes.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/recipes'},
+  { path: '', redirectTo: '/recipes', pathMatch: 'full' }, // This sets the default path matching strategy to full, meaning it will only redirect if the FULL path is '' or empty.
   { path: 'recipes', component: RecipeBookComponent },
   { path: 'shopping-list', component: ShoppingListComponent },
   { path: '**', redirectTo: '/not-found' } // catch invalid routes. MUST be last route because routes are parsed in order they're defined.
