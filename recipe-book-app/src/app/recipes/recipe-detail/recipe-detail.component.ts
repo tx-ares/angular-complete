@@ -1,7 +1,9 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Recipe } from '../models/recipe.model';
-import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { RecipeService } from '../recipe.service';
+import { Ingredient } from 'src/app/shared/ingredient.model';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -9,15 +11,26 @@ import { ShoppingListService } from 'src/app/shopping-list/shopping-list.service
   styleUrls: ['./recipe-detail.component.scss']
 })
 export class RecipeDetailComponent implements OnInit {
+  recipe: Recipe;
+  id: number;
 
   @Input() selectedRecipe: Recipe;
-  constructor(private shoppingListService: ShoppingListService) { }
+
+  constructor(private shoppingListService: ShoppingListService, 
+              private route: ActivatedRoute,
+              private recipeService: RecipeService) { }
 
   ngOnInit() {
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.id = +params['id'];
+          this.recipe = this.recipeService.getRecipe(this.id);
+        }
+      );
   }
 
   sendToShoppingList(selectedRecipe: Recipe) {
-    console.log(selectedRecipe , ' << sendToShoppingList fired');
     selectedRecipe.ingredients.forEach((ingredient) => {
       this.shoppingListService.addIngredient(ingredient);
     });
