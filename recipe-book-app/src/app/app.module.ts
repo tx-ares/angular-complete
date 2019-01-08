@@ -15,11 +15,14 @@ import { DropDownDirective } from './shared/drop-down.directive';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { AppRouterModule } from './app-router.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    PageNotFoundComponent,
     ShoppingListComponent,
     RecipeBookComponent,
     RecipeListComponent,
@@ -28,7 +31,8 @@ import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.compon
     RecipeDetailComponent,
     ShoppingListEditComponent,
     IngredientComponent,
-    DropDownDirective
+    DropDownDirective,
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
