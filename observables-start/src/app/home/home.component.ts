@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/Rx';
 
@@ -14,6 +14,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     const myNumbers = Observable.interval(1000);
+    myNumbers.subscribe(
+      (number: Number) => {
+        console.log(number);
+      }
+    );
   }
 
 }
