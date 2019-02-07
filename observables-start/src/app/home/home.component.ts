@@ -18,9 +18,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const myNumbers = Observable.interval(1000)
-      .map(
+      .map( // the map operator from rxjs will take the data emitted and can be used to manipulate the data.
         (data: number) => {
-          return data * 2;
+          return data * 2; // here it will simply double the emitted value.
         }
       );
     this.numbersObsSubscription = myNumbers.subscribe(
