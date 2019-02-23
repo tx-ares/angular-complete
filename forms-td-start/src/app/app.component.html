@@ -42,7 +42,7 @@
           <select
             id="secret"
             class="form-control"
-            [ngModel]="defaultQuestion"
+            [ngModel]="question"
             name="secret">
             <option value="pet">Your first Pet?</option>
 
@@ -75,6 +75,18 @@
           [disabled]="!formEl.valid"
         >Submit</button>
       </form>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row" *ngIf="submitted">
+    <div class="col-xs-12">
+      <h3>Your Data</h3>
+      <p>Username: {{user.username}} </p>
+      <p>Email: {{user.email}}</p>
+      <p>Secret Question: {{user.secretQuestion}}</p>
+      <p>Answer: {{user.answer}}</p>
+      <p>Gender: {{user.gender}}</p>
     </div>
   </div>
 </div>
