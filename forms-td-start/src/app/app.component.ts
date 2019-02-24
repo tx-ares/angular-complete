@@ -8,17 +8,17 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
   @ViewChild('formEL') signupForm: NgForm;
-  defaultQuestion = 'pet';
-  answer = '';
-  genders = ['male', 'female'];
-  user = {
+  public defaultQuestion = 'pet';
+  public answer = '';
+  public genders = ['male', 'female'];
+  public user = {
     username: '',
     email: '',
     secretQuestion: '',
     answer: '',
     gender: ''
   };
-  submitted = false;
+  public submitted = false;
 
   suggestUserName() {
     const suggestedName = 'Superuser';
@@ -31,10 +31,11 @@ export class AppComponent {
   }
 
   onSubmit(form: NgForm) {
-    this.user.username = this.signupForm.value.username;
-    this.user.email = this.signupForm.value.email;
-    this.user.secretQuestion = this.signupForm.value.question;
-    this.user.answer = this.signupForm.value.answer;
+    this.user.username = this.signupForm.value.userData.username;
+    this.user.email = this.signupForm.value.userData.email;
+    this.user.secretQuestion = this.signupForm.value.secret;
+    this.user.answer = this.signupForm.value.questionAnswer;
+    this.user.gender = this.signupForm.value.gender;
     this.submitted = true;
   }
 }
