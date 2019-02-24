@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  @ViewChild('formEL') signupForm: NgForm;
+  @ViewChild('f') signupForm: NgForm;
   public defaultQuestion = 'pet';
   public answer = '';
   public genders = ['male', 'female'];
