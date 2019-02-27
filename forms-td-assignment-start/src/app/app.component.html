@@ -1,6 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      
+      <form action="">
+        <div class="form-group">
+          <label for="email">Email</label>
+            <input class="form-control" name="email" type="text" email required>
+          <label for="password">Password</label>  
+            <input class="form-control" name="password" type="text" required>
+          <label for="subscription">Subscription</label>  
+            <select class="form-control" name="" id="">
+                <option value="basic">Basic</option>
+                <option value="advanced">Advanced</option>
+                <option value="pro">Pro</option>      
+            </select>
+        </div>
+
+        <button class="btn btn-primary">Sign up</button>
+      </form>
       <!-- Add a Form with the following Inputs (and Validators)
            1) Mail address (should not be empty and should be an email address)
            2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
