@@ -2,16 +2,18 @@
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
       
-      <form action="">
+      <form #formElement="ngForm" (ngSubmit)="onSubmit(formElement)">
         <div class="form-group">
           <label for="email">Email</label>
-            <input class="form-control" name="email" type="text" email required>
+            <input id="email" class="form-control" name="email" type="email" ngModel #email="ngModel" email required>
+            <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email.</span>
           <label for="password">Password</label>  
-            <input class="form-control" name="password" type="text" required>
+            <input class="form-control" name="password" type="password" ngModel #password="ngModel" required>
+            <span class="help-block" *ngIf="!password.valid && password.touched">Please enter a password.</span>
           <label for="subscription">Subscription</label>  
             <select class="form-control" name="" id="">
                 <option value="basic">Basic</option>
-                <option value="advanced">Advanced</option>
+                <option selected value="advanced">Advanced</option>
                 <option value="pro">Pro</option>      
             </select>
         </div>
