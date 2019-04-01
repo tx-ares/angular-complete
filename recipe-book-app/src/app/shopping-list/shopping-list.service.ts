@@ -9,7 +9,7 @@ export class ShoppingListService {
   public ingredientsChanged = new EventEmitter<Ingredient[]>();
   public startedEditing = new Subject<number>();
   
-  private ingredients: Ingredient[] = [
+  public ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Onions', 10),
   ];
@@ -29,6 +29,11 @@ export class ShoppingListService {
   public addIngredient(ingredient: Ingredient): void {
     this.ingredients.push(ingredient);
     this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  public deleteIngredient(index: number) {
+    this.ingredients.splice(index, 1);
+    this.ingredientsChanged.next(this.ingredients);
   }
 
   public updateIngredient(index: number, newIngredient: Ingredient) {
