@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Ingredient } from 'src/app/shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list.service';
 import { NgForm } from '@angular/forms';
@@ -10,9 +10,11 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./shopping-list-edit.component.css']
 })
 export class ShoppingListEditComponent {
+  @ViewChild('f') shoppingListForm: NgForm;
   private subscription: Subscription;
   public editMode: boolean = false;
   public editedItemIndex: number;
+  public editedItem: Ingredient;
 
   constructor(private shoppingListService: ShoppingListService) { }
 
@@ -27,6 +29,11 @@ export class ShoppingListEditComponent {
       .subscribe((index: number) => {
         this.editMode = true;
         this.editedItemIndex = index;
+        this.editedItem = this.shoppingListService.getIngredient(index);
+        this.shoppingListForm.setValue({
+          name: this.editedItem.name,
+          amount: this.editedItem.amount
+        });
       });
   }
 
