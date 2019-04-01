@@ -11,7 +11,7 @@ export class ShoppingListService {
   
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 10),
+    new Ingredient('Onions', 10),
   ];
 
   public newIngredient = new EventEmitter<Ingredient>();
@@ -20,6 +20,10 @@ export class ShoppingListService {
 
   public getIngredients(): Ingredient[] {
     return this.ingredients.slice(); // Create a copy of the ingredients property array.
+  }
+
+  public getIngredient(index: number): Ingredient {
+    return this.ingredients[index]
   }
 
   public addIngredient(ingredient: Ingredient): void {
