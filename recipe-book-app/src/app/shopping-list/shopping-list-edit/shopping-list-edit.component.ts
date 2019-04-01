@@ -18,10 +18,18 @@ export class ShoppingListEditComponent {
 
   constructor(private shoppingListService: ShoppingListService) { }
 
-  public onAddItem(form: NgForm): void {
+  public onSubmit(form: NgForm): void {
     const value = form.value;
     const newIngredient = new Ingredient(value.name, value.amount);
-    this.shoppingListService.addIngredient(newIngredient);
+
+    if ( this.editMode ) {
+      this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient)
+    } else {
+      this.shoppingListService.addIngredient(newIngredient);
+    }
+
+    this.editMode = false;
+    this.shoppingListForm.reset();
   }
 
   public ngOnInit(): void {
