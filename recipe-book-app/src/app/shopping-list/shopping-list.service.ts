@@ -6,21 +6,23 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ShoppingListService {
-  ingredientsChanged = new EventEmitter<Ingredient[]>();
+  public ingredientsChanged = new EventEmitter<Ingredient[]>();
+  public startedEditing = new Subject<number>();
+  
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10),
   ];
 
-  newIngredient = new EventEmitter<Ingredient>();
+  public newIngredient = new EventEmitter<Ingredient>();
 
   constructor() { }
 
-  getIngredients() {
+  public getIngredients(): Ingredient[] {
     return this.ingredients.slice(); // Create a copy of the ingredients property array.
   }
 
-  addIngredient(ingredient: Ingredient) {
+  public addIngredient(ingredient: Ingredient): void {
     this.ingredients.push(ingredient);
     this.ingredientsChanged.next(this.ingredients.slice());
   }
