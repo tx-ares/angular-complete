@@ -32,6 +32,16 @@ export class ShoppingListEditComponent {
     this.shoppingListForm.reset();
   }
 
+  public onDelete() {
+    this.shoppingListService.deleteIngredient(this.editedItemIndex);
+    this.clearForm();
+  }
+
+  public clearForm() {
+    this.shoppingListForm.reset();
+    this.editMode = false;
+  }
+
   public ngOnInit(): void {
     this.subscription = this.shoppingListService.startedEditing
       .subscribe((index: number) => {
