@@ -13,11 +13,11 @@ export class ShoppingListComponent implements OnInit {
 
   constructor(private shoppingListService: ShoppingListService) { }
   
-  onEditItem(index: number) {
+  public onEditItem(index: number): void {
     this.shoppingListService.startedEditing.next(index);
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.ingredients = this.shoppingListService.getIngredients();
     this.shoppingListService.ingredientsChanged
       .subscribe(
