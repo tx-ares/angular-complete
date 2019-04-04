@@ -32,12 +32,12 @@ export class ShoppingListEditComponent {
     this.shoppingListForm.reset();
   }
 
-  public onDelete() {
+  public onDelete(): void {
     this.shoppingListService.deleteIngredient(this.editedItemIndex);
     this.clearForm();
   }
 
-  public clearForm() {
+  public clearForm(): void {
     this.shoppingListForm.reset();
     this.editMode = false;
   }
