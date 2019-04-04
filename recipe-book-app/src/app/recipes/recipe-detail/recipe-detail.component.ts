@@ -21,7 +21,7 @@ export class RecipeDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private recipeService: RecipeService) { }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.route.params
       .subscribe(
         (params: Params) => {
@@ -31,13 +31,13 @@ export class RecipeDetailComponent implements OnInit {
       );
   }
 
-  sendToShoppingList(selectedRecipe: Recipe) {
+  public sendToShoppingList(selectedRecipe: Recipe): void {
     selectedRecipe.ingredients.forEach((ingredient) => {
       this.shoppingListService.addIngredient(ingredient);
     });
   }
 
-  onEditRecipe() {
+  public onEditRecipe(): void {
     this.router.navigate(['edit'], {relativeTo: this.route})
   }
 
