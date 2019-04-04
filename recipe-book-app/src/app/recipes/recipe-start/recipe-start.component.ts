@@ -6,5 +6,5 @@ import { OnInit, Component } from "@angular/core";
   styleUrls: ['./recipe-start.component.css'],
 })
 export class RecipeStartComponent implements OnInit {
-  ngOnInit() { }
+  public ngOnInit(): void { }
  }
