@@ -29,9 +29,9 @@
     "label-position": true,
     "max-line-length": [
       true,
-      140
+      180
     ],
-    "member-access": false,
+    "member-access": true,
     "member-ordering": [
       true,
       {
@@ -54,7 +54,7 @@
       "trace"
     ],
     "no-construct": true,
-    "no-debugger": true,
+    "no-debugger": false,
     "no-duplicate-super": true,
     "no-empty": false,
     "no-empty-interface": true,
@@ -96,6 +96,7 @@
       true,
       "allow-null-check"
     ],
+    "typedef": [true, "call-signature", "parameter"],
     "typedef-whitespace": [
       true,
       {
@@ -116,6 +117,18 @@
       "check-separator",
       "check-type"
     ],
+    "directive-selector": [
+      true,
+      "attribute",
+      ["viz", "app"],
+      "camelCase"
+    ],
+    "component-selector": [
+      true,
+      "element",
+      ["viz", "app"],
+      "kebab-case"
+    ],
     "no-output-on-prefix": true,
     "use-input-property-decorator": true,
     "use-output-property-decorator": true,
@@ -125,6 +138,11 @@
     "use-life-cycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "no-duplicate-variable": true,
+    "switch-default": true,
+    "promise-function-async": true,
+    "no-floating-promises": true,
+    "no-return-await": true
   }
 }

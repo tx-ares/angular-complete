@@ -1,20 +1,26 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "resolveJsonModule": true,
     "target": "es5",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2017",
-      "dom"
-    ]
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "paths": {
+      "@slb-viz/viz-3d-client": [
+        // "dist/viz-3d-client"
+        "modules/src/public_api.ts"
+      ],
+      "app": ["src/app"],
+      "app/*": ["src/app/*"]
+    },
+    "module": "es2015",
+    "baseUrl": "./",
+    "types": ["node", "jasmine"]
   }
 }
