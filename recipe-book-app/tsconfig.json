@@ -12,12 +12,11 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2017", "dom"],
     "paths": {
-      "@slb-viz/viz-3d-client": [
-        // "dist/viz-3d-client"
-        "modules/src/public_api.ts"
-      ],
       "app": ["src/app"],
-      "app/*": ["src/app/*"]
+      "app/*": ["src/app/*"],
+      "core-js/es7/reflect": [
+        "node_modules/core-js/proposals/reflect-metadata"
+      ]
     },
     "module": "es2015",
     "baseUrl": "./",
