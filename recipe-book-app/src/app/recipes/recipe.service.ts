@@ -1,5 +1,6 @@
 import { Recipe } from './models/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 export class RecipeService {
 
@@ -25,11 +26,25 @@ export class RecipeService {
       ])
   ];
 
-  getRecipe(index: number) {
+  constructor(private shoppingListService: ShoppingListService) { }
+
+  public getRecipe(index: number): Recipe {
     return this.recipes[index];
   }
   
-  getRecipes() {
+  public getRecipes(): Recipe[] {
     return this.recipes.slice(); // By calling slice, we can make a copy of the recipes instead of affecting the service's.
+  }
+
+  public addIngredientsToShoppingList(ingredients: any) { // TODO: Fix 'any' should be Ingredients[]
+    this.shoppingListService.addIngredient(ingredients);
+  }
+
+  public addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+  }
+
+  public updateRecipe(index: number, newRecipe: Recipe) {
+    this.recipes[index] = newRecipe;
   }
 }
