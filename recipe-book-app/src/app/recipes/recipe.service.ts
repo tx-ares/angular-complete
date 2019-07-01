@@ -1,8 +1,12 @@
 import { Recipe } from './models/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class RecipeService {
+  recipesChanged = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe(
@@ -36,15 +40,17 @@ export class RecipeService {
     return this.recipes.slice(); // By calling slice, we can make a copy of the recipes instead of affecting the service's.
   }
 
-  public addIngredientsToShoppingList(ingredients: any) { // TODO: Fix 'any' should be Ingredients[]
-    this.shoppingListService.addIngredient(ingredients);
+  public addIngredientsToShoppingList(ingredients: Ingredient[]) { 
+    this.shoppingListService.addIngredients(ingredients);
   }
 
   public addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   public updateRecipe(index: number, newRecipe: Recipe) {
     this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
   }
 }
