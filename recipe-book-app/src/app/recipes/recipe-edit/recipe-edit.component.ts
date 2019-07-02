@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, AbstractControl, Validators } from '@angular/forms';
 import { RecipeService } from '../recipe.service';
-import { Recipe } from '../models/recipe.model';
 
 
 @Component({
@@ -17,7 +16,8 @@ export class RecipeEditComponent implements OnInit {
   public recipeForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
-              private recipeService: RecipeService) { }
+              private recipeService: RecipeService,
+              private router: Router) { }
 
   public ngOnInit(): void {
     this.route.params
@@ -28,6 +28,10 @@ export class RecipeEditComponent implements OnInit {
           this.initForm();
         }
       )
+  }
+
+  public onCancel(): void {
+    this.router.navigate(['../'], {relativeTo: this.route});
   }
 
   private initForm(): void {
@@ -95,6 +99,8 @@ export class RecipeEditComponent implements OnInit {
     } else {
       this.recipeService.addRecipe(this.recipeForm.value);
     }
+
+    this.onCancel(); // We call this to navigate after submission.  Could use a better method name maybe..
   }
 
 }
