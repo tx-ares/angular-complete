@@ -45,13 +45,13 @@ export class RecipeEditComponent implements OnInit {
       recipeName = recipe.name;
       recipeImagePath = recipe.imagePath;
       recipeDescription = recipe.description;
-      if (recipe['ingredients']) { 
+      if (recipe['ingredients']) {
         for (let ingredient of recipe.ingredients) {
           recipeIngredients.push(
             new FormGroup({
               'name': new FormControl(ingredient.name, Validators.required),
               'amount': new FormControl(ingredient.amount, [
-                Validators.required, 
+                Validators.required,
                 Validators.pattern(/^[1-9]+[0-9]*$/)
               ])
             })
@@ -77,11 +77,15 @@ export class RecipeEditComponent implements OnInit {
       new FormGroup({
         'name': new FormControl(null, Validators.required),
         'amount': new FormControl(null, [
-          Validators.required, 
+          Validators.required,
           Validators.pattern(/^[1-9]+[0-9]*$/)
         ])
       })
     );
+  }
+
+  public onDeleteIngredient(index: number) {
+    (<FormArray>this.recipeForm.get('ingredients')).removeAt(index);
   }
 
   public onSubmit(): void {
@@ -93,7 +97,7 @@ export class RecipeEditComponent implements OnInit {
     //   this.recipeForm.value['imagePath'],
     //   this.recipeForm.value['ingredients']);
 
-    
+
     if (this.editMode) {
       this.recipeService.updateRecipe(this.id, this.recipeForm.value); // Just pass in the object created by the reactive form!
     } else {
