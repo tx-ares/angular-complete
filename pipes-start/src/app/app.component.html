@@ -11,7 +11,7 @@
             {{ server.status }}
           </span>
           <!-- The below pipes are built into angular.  See their docs to see what kind of parameters and options can be passed with them. -->
-          <strong>{{ server.name }}</strong> | {{ server.instanceType | uppercase }} | {{ server.started | date:'fullDate' }}
+          <strong>{{ server.name | shorten }}</strong> | {{ server.instanceType | uppercase }} | {{ server.started | date:'fullDate' | uppercase }}
         </li>
       </ul>
     </div>
