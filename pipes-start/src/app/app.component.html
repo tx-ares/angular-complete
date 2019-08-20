@@ -5,17 +5,22 @@
       <br>
       <button class="btn btn-primary" (click)="onAddServer()">Add Server</button>
       <hr>
+      <br><br>
+      <!-- When handling promises, angular has an async pipe for which will display data better. -->
+      <h4>App Status: {{ appStatus | async }}</h4> 
       <ul class="list-group">
         <li
           class="list-group-item"
-          *ngFor="let server of servers | filter: filteredStatus: 'status'"
+          *ngFor="let server of servers | filter:filteredStatus:'status'"
           [ngClass]="getStatusClasses(server)">
           <span
             class="badge">
             {{ server.status }}
           </span>
           <!-- The below pipes are built into angular.  See their docs to see what kind of parameters and options can be passed with them. -->
-          <strong>{{ server.name }}</strong> | {{ server.instanceType | uppercase }} | {{ server.started | date:'fullDate' | uppercase }}
+          <strong>{{ server.name }}</strong> | 
+          {{ server.instanceType | uppercase }} | 
+          {{ server.started | date:'fullDate' | uppercase }}
         </li>
       </ul>
     </div>

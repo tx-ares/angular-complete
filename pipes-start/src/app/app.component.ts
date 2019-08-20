@@ -6,7 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  servers = [
+  public appStatus = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('stable');
+    }, 2000);
+  });
+  public servers = [
     {
       instanceType: 'medium',
       name: 'Production Server',
