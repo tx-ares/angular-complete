@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { reverse } from 'dns';
 
 @Pipe({
   name: 'reverse'
