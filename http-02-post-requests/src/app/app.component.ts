@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  loadedPosts = [];
+  public loadedPosts = [];
 
   constructor(private http: HttpClient) {}
 
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
     // Send Http request
     this.http
       .post(
-        'https://angular-complete-b4f4a.firebaseapp.com/posts.json',
+        'https://angular-complete-b4f4a.firebaseio.com/posts.json', // Firebase's api requires that we send a request as JSON in the url
         postData
       )
       .subscribe(responseData => {
