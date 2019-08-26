@@ -11,13 +11,13 @@ export class AppComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit() {}
+  public ngOnInit() {}
 
-  onCreatePost(postData: { title: string; content: string }) {
+  public onCreatePost(postData: { title: string; content: string }) {
     // Send Http request
     this.http
       .post(
-        'https://ng-complete-guide-c56d3.firebaseio.com/posts.json',
+        'https://angular-complete-b4f4a.firebaseapp.com/posts.json',
         postData
       )
       .subscribe(responseData => {
@@ -25,11 +25,11 @@ export class AppComponent implements OnInit {
       });
   }
 
-  onFetchPosts() {
+  public onFetchPosts() {
     // Send Http request
   }
 
-  onClearPosts() {
+  public onClearPosts() {
     // Send Http request
   }
 }
