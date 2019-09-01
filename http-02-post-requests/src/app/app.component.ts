@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { Post } from './post.model';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,9 @@ export class AppComponent implements OnInit {
     this.onFetchPosts();
   }
 
-  public onCreatePost(postData: { title: string; content: string }) {
+  public onCreatePost(postData: Post) {
     this.http
-      .post(
+      .post<{ name: string }>( // You can also type cast http client's post & get methods to inform TypeScript what type of object is being retrieved or sent.
         'https://angular-complete-b4f4a.firebaseio.com/posts.json', // Firebase's api requires that we send a request as JSON in the url
         postData
       )
@@ -30,13 +31,14 @@ export class AppComponent implements OnInit {
   public onFetchPosts() {
     this.http.get('https://angular-complete-b4f4a.firebaseio.com/posts.json')
     .pipe(
-      map(responseData => {
-        const postsArray = [];
+      map((responseData: {[key: string]: Post }) => {
+        const postsArray: Post[] = [];
         for (const key in responseData) {
           if (responseData.hasOwnProperty(key)) {
             postsArray.push({...responseData[key], id: key });
           }
         }
+        return postsArray;
       })
     )
     .subscribe( (posts) => {
