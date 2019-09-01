@@ -39,7 +39,6 @@
       <button class="btn btn-primary" (click)="onFetchPosts()">
         Fetch Posts
       </button>
-      |
       <button
         class="btn btn-danger"
         [disabled]="loadedPosts.length < 1"
@@ -51,14 +50,26 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-      <p *ngIf="loadedPosts.length < 1">No posts yet!</p>
-      <ul class="list-group" *ngIf="loadedPosts.length >= 1">
+      <p *ngIf="loadedPosts.length < 1 && !isFetching;">No posts yet!</p>
+      <ul class="list-group" *ngIf="loadedPosts.length >= 1 && !isFetching;">
         <li class="list-group-item" *ngFor="let post of loadedPosts;">
           <h3>{{ post.title }}</h3>
           <p>{{ post.content }}</p>
         </li>
       </ul>
-      <p>No posts available!</p>
+      <div class="spinner-icon" *ngIf="isFetching;">
+          <div class="sk-cube-grid">
+              <div class="sk-cube sk-cube1"></div>
+              <div class="sk-cube sk-cube2"></div>
+              <div class="sk-cube sk-cube3"></div>
+              <div class="sk-cube sk-cube4"></div>
+              <div class="sk-cube sk-cube5"></div>
+              <div class="sk-cube sk-cube6"></div>
+              <div class="sk-cube sk-cube7"></div>
+              <div class="sk-cube sk-cube8"></div>
+              <div class="sk-cube sk-cube9"></div>
+            </div>
+      </div>
     </div>
   </div>
 </div>
