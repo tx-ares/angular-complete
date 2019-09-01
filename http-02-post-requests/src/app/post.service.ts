@@ -34,4 +34,8 @@ export class PostService {
               })
             );
   }
+
+  public clearAllPosts() {
+    return this.http.delete('https://angular-complete-b4f4a.firebaseio.com/posts.json');
+  }
 }
