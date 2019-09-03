@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Post } from './post.model';
 import { map, catchError } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
@@ -27,9 +27,8 @@ export class PostService {
             .get(
               'https://angular-complete-b4f4a.firebaseio.com/posts.json',
               {
-                headers: new HttpHeaders({
-                  'Custom-Header': 'MyCustomHeader!'
-                })
+                headers: new HttpHeaders({'Custom-Header': 'MyCustomHeader!'}),
+                params: new HttpParams().set('print', 'pretty')
               })
             .pipe(
               map((responseData: {[key: string]: Post }) => {
