@@ -1,9 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Post } from './post.model';
 import { PostService } from './post.service';
 import { Subscription } from 'rxjs';
+import { Form, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,8 @@ export class AppComponent implements OnInit, OnDestroy {
   public isFetching = false;
   public error = null;
   public subscriptions: Subscription[] = [];
+
+  @ViewChild('postForm', {static: false}) postForm: NgForm;
 
   constructor(private http: HttpClient,
               private postService: PostService) {}
@@ -37,7 +40,10 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public onCreatePost(postData: Post) {
-    this.postService.createAndStorePost(postData.title, postData.content);
+    this.subscriptions.push(this.postService.createAndStorePost(postData.title, postData.content).subscribe(() => {
+      this.postForm.reset();
+      this.onFetchPosts();
+    }));
   }
 
   public onFetchPosts() {
