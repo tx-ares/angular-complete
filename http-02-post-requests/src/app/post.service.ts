@@ -18,7 +18,10 @@ export class PostService {
     return this.http
             .post<{ name: string }>( // You can also type cast http client's post method to inform TypeScript what type of object is being retrieved or sent.
               'https://angular-complete-b4f4a.firebaseio.com/posts.json', // Firebase's api requires that we send a request as JSON in the url
-              postData
+              postData,
+              {
+                observe: 'response'
+              }
             );
   }
 
