@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Post } from './post.model';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { Subject, throwError } from 'rxjs';
 
 @Injectable({
@@ -51,6 +51,13 @@ export class PostService {
   }
 
   public clearAllPosts() {
-    return this.http.delete('https://angular-complete-b4f4a.firebaseio.com/posts.json');
+    return this.http.delete(
+      'https://angular-complete-b4f4a.firebaseio.com/posts.json',
+      {
+        observe: 'events'
+      }
+    ).pipe(tap(event => {
+      console.log(event);
+    }));
   }
 }
