@@ -20,7 +20,8 @@ export class PostService {
               'https://angular-complete-b4f4a.firebaseio.com/posts.json', // Firebase's api requires that we send a request as JSON in the url
               postData,
               {
-                observe: 'response'
+                observe: 'response',
+                responseType: 'json'
               }
             );
   }
