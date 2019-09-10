@@ -28,7 +28,7 @@ export class PostService {
 
   public fetchPosts() {
     return this.http
-            .get(
+            .get<{ [key: string]: Post}>(
               'https://angular-complete-b4f4a.firebaseio.com/posts.json',
               {
                 headers: new HttpHeaders({'Custom-Header': 'MyCustomHeader!'}),
