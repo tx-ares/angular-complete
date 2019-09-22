@@ -32,15 +32,20 @@ export class RecipeService {
 
   constructor(private shoppingListService: ShoppingListService) { }
 
+  public setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
   public getRecipe(index: number): Recipe {
     return this.recipes[index];
   }
-  
+
   public getRecipes(): Recipe[] {
     return this.recipes.slice(); // By calling slice, we can make a copy of the recipes instead of affecting the service's.
   }
 
-  public addIngredientsToShoppingList(ingredients: Ingredient[]) { 
+  public addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
   }
 
@@ -53,7 +58,7 @@ export class RecipeService {
     this.recipes[index] = newRecipe;
     this.recipesChanged.next(this.recipes.slice());
   }
-  
+
   public deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
     this.recipesChanged.next(this.recipes.slice());
