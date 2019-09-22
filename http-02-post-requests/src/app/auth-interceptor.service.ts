@@ -1,5 +1,4 @@
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEventType } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
+import { HttpInterceptor, HttpRequest, HttpHandler } from '@angular/common/http';
 
 export class AuthInterceptorService implements HttpInterceptor {
   public intercept(req: HttpRequest<any>, next: HttpHandler) {
