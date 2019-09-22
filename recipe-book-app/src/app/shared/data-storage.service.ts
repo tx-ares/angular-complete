@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { RecipeService } from 'app/recipes/recipe.service';
+import { Recipe } from 'app/recipes/models/recipe.model';
 
 @Injectable({ // Remember that this is an optional / alternative way to provide a service to the entire app.
   providedIn: 'root' // Alternatively, I can add this to the providers array in app.module.ts
@@ -14,6 +15,13 @@ export class DataStorageService {
     this.http.put('https://txs-ng-recipe-book.firebaseio.com/recipes.json', recipes) // Note about using PUT verb here, with firebase, it assumes you know what data you are storing and thus will not automatically add a rng UUID like when you use POST requests.
       .subscribe(response => {
         console.log(response);
+      });
+  }
+
+  public fetchRecipes() {
+    const recipes = this.http.get<Recipe[]>('https://txs-ng-recipe-book.firebaseio.com/recipes.json')
+      .subscribe(recipes => {
+        this.recipeService.setRecipes(recipes);
       });
   }
 }
