@@ -11,12 +11,12 @@ import { Ingredient } from 'src/app/shared/ingredient.model';
   styleUrls: ['./recipe-detail.component.scss']
 })
 export class RecipeDetailComponent implements OnInit {
-  recipe: Recipe;
-  id: number;
+  public recipe: Recipe;
+  public id: number;
 
   @Input() selectedRecipe: Recipe;
 
-  constructor(private shoppingListService: ShoppingListService, 
+  constructor(private shoppingListService: ShoppingListService,
               private router: Router,
               private route: ActivatedRoute,
               private recipeService: RecipeService) { }
@@ -44,5 +44,5 @@ export class RecipeDetailComponent implements OnInit {
   public onDeleteRecipe(): void {
     this.recipeService.deleteRecipe(this.id);
     this.router.navigate(['/recipes']);
-  } 
+  }
 }
