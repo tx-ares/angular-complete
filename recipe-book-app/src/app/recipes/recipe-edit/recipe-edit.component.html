@@ -6,14 +6,12 @@
           <button
             type="submit"
             class="btn btn-success"
-            [disabled]="!recipeForm.valid"
-          >Save</button>
+            [disabled]="!recipeForm.valid">Save</button>
 
           <button
             type="submit"
             class="btn btn-danger"
-            (click)="onCancel()"
-          >Cancel</button>
+            (click)="onCancel()">Cancel</button>
         </div>
       </div>
 
@@ -26,8 +24,7 @@
               type="text"
               id="name"
               class="form-control"
-              formControlName="name"
-            >
+              formControlName="name">
           </div>
         </div>
       </div>
@@ -42,8 +39,7 @@
               id="imagePath"
               class="form-control"
               formControlName="imagePath"
-              #imagePath
-            >
+              #imagePath>
           </div>
         </div>
       </div>
@@ -53,8 +49,7 @@
           <img
             [src]="imagePath.value"
             class="img-responsive"
-            alt=""
-          >
+            alt="">
         </div>
       </div>
 
@@ -68,39 +63,40 @@
               id="description"
               class="form-control"
               formControlName="description"
-              rows="6"
-            ></textarea>
+              rows="6"></textarea>
           </div>
         </div>
       </div>
 
       <div class="row">
         <div class="col-xs-12" formArrayName="ingredients">
-          <div class="row" [formGroupName]="i" *ngFor="let ingredientCtrl of getControls('ingredients'); let i = index;" style="margin-top: .8rem;">
+          <div class="row" [formGroupName]="i" *ngFor="let ingredientCtrl of
+            getControls('ingredients'); let i= index;" style="margin-top:
+            .8rem;">
             <div class="col-xs-8">
               <input
                 type="text"
                 class="form-control"
-                formControlName="name"
-              >
+                formControlName="name">
             </div>
 
             <div class="col-xs-2">
               <input
                 type="text"
                 class="form-control"
-                formControlName="amount"
-              >
+                formControlName="amount">
             </div>
 
             <div class="col-xs-2">
-              <button type="button" class="btn btn-danger" (click)="onDeleteIngredient(i);">X</button>
+              <button type="button" class="btn btn-danger"
+                (click)="onDeleteIngredient(i);">X</button>
             </div>
             <hr>
           </div>
           <div class="row">
             <div class="col-xs-12">
-              <button type="button" class="btn btn-success" (click)="onAddIngredient()">Add Ingredient</button>
+              <button type="button" class="btn btn-success"
+                (click)="onAddIngredient()">Add Ingredient</button>
             </div>
           </div>
         </div>
