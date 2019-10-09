@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { throwError, Subject } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { User } from './user/user.model';
 
 export interface AuthResponseData {
   kind: string;
@@ -19,6 +20,8 @@ export interface AuthResponseData {
 })
 export class AuthService {
 
+  private user = new Subject<User>();
+
   constructor(private http: HttpClient) { }
 
   public signUp(email: string, password: string) {
@@ -29,7 +32,14 @@ export class AuthService {
         returnSecureToken: true
       }
     )
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError),
+        tap(responseData => {
+          this.handleAuth(
+            responseData.email,
+            responseData.localId,
+            responseData.idToken,
+            +responseData.expiresIn);
+        }));
   }
 
 
@@ -41,7 +51,14 @@ export class AuthService {
         returnSecureToken: true
       }
     )
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError),
+        tap(responseData => {
+          this.handleAuth(
+            responseData.email,
+            responseData.localId,
+            responseData.idToken,
+            +responseData.expiresIn);
+        }));
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
@@ -62,5 +79,18 @@ export class AuthService {
         break;
     }
     return throwError(errorMessage);
+  }
+
+  private handleAuth(email: string, userId: string, token: string, expiresIn: number) {
+    const expirationDate = new Date(
+      new Date().getTime() + +expiresIn * 1000  // Date().getTime() will return the current time stamp in milliseconds.  Adding a + sign infront of a variable will change it to number type if possible.
+    );
+    const user = new User(
+      email,
+      userId,
+      token,
+      expirationDate
+    );
+    this.user.next(user);
   }
 }
