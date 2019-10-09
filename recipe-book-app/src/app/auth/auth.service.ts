@@ -20,48 +20,57 @@ export interface AuthResponseData {
 })
 export class AuthService {
 
-  private user = new Subject<User>();
+  public user = new Subject<User>();
 
   constructor(private http: HttpClient) { }
 
   public signUp(email: string, password: string) {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKEY,
+    return this.http.post<AuthResponseData>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKEY,
       {
         email: email,
         password: password,
         returnSecureToken: true
       }
     )
-      .pipe(catchError(this.handleError),
+      .pipe(
         tap(responseData => {
           this.handleAuth(
             responseData.email,
             responseData.localId,
             responseData.idToken,
             +responseData.expiresIn);
-        }));
+        }),
+        catchError(this.handleError)
+      );
   }
 
 
   public login(email: string, password: string) {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=' + environment.firebaseAPIKEY,
+    console.log(environment.firebaseAPIKEY)
+
+    return this.http.post<AuthResponseData>(
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.firebaseAPIKEY,
       {
         email: email,
         password: password,
         returnSecureToken: true
       }
     )
-      .pipe(catchError(this.handleError),
+      .pipe(
         tap(responseData => {
           this.handleAuth(
             responseData.email,
             responseData.localId,
             responseData.idToken,
             +responseData.expiresIn);
-        }));
+        }),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(errorResponse: HttpErrorResponse) {
+    console.log(errorResponse);
     let errorMessage = 'An unknown error occurred.';
 
     if (!errorResponse.error || !errorResponse.error.error) {
@@ -82,6 +91,7 @@ export class AuthService {
   }
 
   private handleAuth(email: string, userId: string, token: string, expiresIn: number) {
+    console.log(email, userId, token)
     const expirationDate = new Date(
       new Date().getTime() + +expiresIn * 1000  // Date().getTime() will return the current time stamp in milliseconds.  Adding a + sign infront of a variable will change it to number type if possible.
     );
