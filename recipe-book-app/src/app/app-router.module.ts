@@ -7,16 +7,20 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipesResolverService } from './recipes/recipes-resolver.service';
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuardService } from './auth/auth-guard.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' }, // This sets the default path matching strategy to full, meaning it will only redirect if the FULL path is '' or empty.
-  { path: 'recipes', component: RecipeBookComponent,
+  {
+    path: 'recipes', component: RecipeBookComponent,
+    canActivate: [AuthGuardService],
     children: [
       { path: '', component: RecipeStartComponent },
       { path: 'new', component: RecipeEditComponent },
       { path: ':id', component: RecipeDetailComponent, resolve: [RecipesResolverService] },
       { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipesResolverService] }
-    ] },
+    ]
+  },
   { path: 'shopping-list', component: ShoppingListComponent },
   { path: 'auth', component: AuthComponent },
   { path: '**', redirectTo: '/not-found' } // catch invalid routes. MUST be last route because routes are parsed in order they're defined.
@@ -24,8 +28,8 @@ const appRoutes: Routes = [
 
 @NgModule({ // This decorator changes this typescript class into an Angular Module.
   imports: [
-      RouterModule.forRoot(appRoutes) // forRoot will register the routes to the root of the application.
-                                     // Other things can be registered this way, but routes must be registered here.
+    RouterModule.forRoot(appRoutes) // forRoot will register the routes to the root of the application.
+    // Other things can be registered this way, but routes must be registered here.
   ],
   exports: [RouterModule]
 })
