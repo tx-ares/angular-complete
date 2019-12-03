@@ -41,7 +41,8 @@ export class AuthComponent implements OnInit {
       authObs = this.authService.signUp(email, password);
     }
 
-    authObs.subscribe(resp => {
+    authObs.subscribe(
+      resp => {
         console.log(resp);
         this.isLoading = false;
         this.router.navigate(['/recipes']); // Use programmatic routing once user is successfully authenticated
