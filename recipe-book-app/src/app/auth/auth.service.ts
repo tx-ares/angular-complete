@@ -71,6 +71,30 @@ export class AuthService {
       );
   }
 
+  public autoLogin() {
+    const userData: {
+      email: string,
+      id: string,
+      _token: string,
+      _tokenExpirationDate: string
+    } = JSON.parse(localStorage.getItem('userData')); // Since it is stored as a stringifyed object, it must be parsed as JSON.
+
+    if (!userData) {
+      return;
+    }
+
+    const loadedUser = new User(
+      userData.email,
+      userData.id,
+      userData._token,
+      new Date(userData._tokenExpirationDate)
+    );
+
+    if (loadedUser.token) {
+      this.user.next(loadedUser);
+    }
+  }
+
   public logout() {
     this.user.next(null);
     this.router.navigate(['/auth']);
@@ -109,5 +133,6 @@ export class AuthService {
       expirationDate
     );
     this.user.next(user);
+    localStorage.setItem('userData', JSON.stringify(user)); // We can access the browser's local storage to store data from our application.
   }
 }
