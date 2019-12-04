@@ -1,22 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService, AuthResponseData } from './auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { AlertComponent } from 'app/shared/alert/alert.component';
+import { PlaceholderDirective } from 'app/shared/placeholder/placeholder.directive';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent {
+export class AuthComponent implements OnDestroy {
 
   public isLoginMode = true;
   public isLoading = false;
   public error: string = null;
+  public closeSub: Subscription;
+  @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective; // By passing in a class to ViewChild, it will find the first instance of said class.
 
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private router: Router,
+              private componentFactoryResolver: ComponentFactoryResolver) { }
 
   public onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -48,7 +53,7 @@ export class AuthComponent {
         this.router.navigate(['/recipes']); // Use programmatic routing once user is successfully authenticated
       },
       errorMessage => {
-        this.error = errorMessage;
+        this.showErrorAlert(errorMessage);
         this.isLoading = false;
       }
     );
@@ -58,6 +63,26 @@ export class AuthComponent {
 
   public onHandleError() {
     this.error = null;
+  }
+
+  private showErrorAlert(message: string) {
+    const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertComponent); // This is how I can programatically create a component using Angular's syntax to do so using the ComponentFactoryResolver class.
+    const hostViewContainerRef = this.alertHost.viewContainerRef;
+
+    hostViewContainerRef.clear(); // This will clear anything that was previously rendered in our ViewContainer.
+    const componentRef = hostViewContainerRef.createComponent(alertComponentFactory);
+
+    componentRef.instance.message = message;
+    this.closeSub = componentRef.instance.close.subscribe(() => {
+      this.closeSub.unsubscribe();
+      hostViewContainerRef.clear();
+    });
+  }
+
+  public ngOnDestroy() {
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
   }
 
 }
