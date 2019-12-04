@@ -24,12 +24,13 @@ import { RecipesRouterModule } from './recipes-routing.module';
     RouterModule,
     RecipesRouterModule
   ],
-  exports: [
-    RecipeBookComponent,
-    RecipeListComponent,
-    RecipeItemComponent,
-    RecipeStartComponent,
-    RecipeDetailComponent
-  ]
+  // Since the components are only being used internally in the recipes module, these components don't need to be exported anymore as they won't be loaded anywhere else.
+  // exports: [
+  //   RecipeBookComponent,
+  //   RecipeListComponent,
+  //   RecipeItemComponent,
+  //   RecipeStartComponent,
+  //   RecipeDetailComponent
+  // ]
 })
 export class RecipesModule { }
