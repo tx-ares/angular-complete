@@ -4,8 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingListEditComponent } from './shopping-list/shopping-list-edit/shopping-list-edit.component';
 import { IngredientComponent } from './shopping-list/models/ingredient/ingredient.component';
 import { HeaderComponent } from './header/header.component';
 import { DropDownDirective } from './shared/drop-down.directive';
@@ -20,14 +18,13 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
 import { AlertComponent } from './shared/alert/alert.component';
 import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
 import { RecipesModule } from './recipes/recipes.module';
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     PageNotFoundComponent,
-    ShoppingListComponent,
-    ShoppingListEditComponent,
     IngredientComponent,
     DropDownDirective,
     RecipeEditComponent,
@@ -42,7 +39,8 @@ import { RecipesModule } from './recipes/recipes.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRouterModule,
-    RecipesModule
+    RecipesModule,
+    ShoppingListModule
   ],
   providers: [
     ShoppingListService,
