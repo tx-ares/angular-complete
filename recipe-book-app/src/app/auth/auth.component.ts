@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
 
   public isLoginMode = true;
   public isLoading = false;
@@ -56,6 +56,8 @@ export class AuthComponent implements OnInit {
     authForm.reset();
   }
 
-  public ngOnInit() { }
+  public onHandleError() {
+    this.error = null;
+  }
 
 }
