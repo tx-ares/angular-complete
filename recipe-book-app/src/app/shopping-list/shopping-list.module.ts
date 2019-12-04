@@ -12,7 +12,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ShoppingListEditComponent,
   ],
   imports: [
-    CommonModule,
+    CommonModule, // Template directives like ngIf and ngFor are usually provided by BrowserModule, however, BrowserModule can only be imported once in an Angular application since it handles start up processes as well as providing the template directives.  For that reason, you can use CommonModule to gain access to the template directives ONLY.
     ReactiveFormsModule,
     RouterModule,
     FormsModule,
