@@ -9,12 +9,12 @@ import { HeaderComponent } from './header/header.component';
 import { AppRouterModule } from './app-router.module';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AuthComponent } from './auth/auth.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { RecipesModule } from './recipes/recipes.module';
 import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [ // Important thing to know is that Components, Pipes, Directives, etc. can only be declared ONCE in the ENTIRE APPLICATION. Make sure this is the case when using multiple feature modules.
@@ -22,17 +22,17 @@ import { CoreModule } from './core.module';
     HeaderComponent,
     PageNotFoundComponent,
     IngredientComponent,
-    RecipeEditComponent,
-    AuthComponent
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     AppRouterModule,
     RecipesModule,
     ShoppingListModule,
+    AuthModule,
     SharedModule,
     CoreModule
   ],
