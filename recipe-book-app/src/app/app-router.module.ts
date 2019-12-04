@@ -1,10 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { AuthComponent } from './auth/auth.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/recipes', pathMatch: 'full' }, // This sets the default path matching strategy to full, meaning it will only redirect if the FULL path is '' or empty.
-  { path: 'auth', component: AuthComponent },
+  { path: '', redirectTo: '/recipes', pathMatch: 'full' } // This sets the default path matching strategy to full, meaning it will only redirect if the FULL path is '' or empty.
 ];
 
 @NgModule({ // This decorator changes this typescript class into an Angular Module.
