@@ -84,5 +84,5 @@ export class AuthComponent implements OnDestroy {
       this.closeSub.unsubscribe();
     }
   }
-
+// test
 }
