@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./shopping-list-edit.component.css']
 })
 export class ShoppingListEditComponent {
-  @ViewChild('f') shoppingListForm: NgForm;
+  @ViewChild('f', { static: false }) shoppingListForm: NgForm;
   private subscription: Subscription;
   public editMode: boolean = false;
   public editedItemIndex: number;

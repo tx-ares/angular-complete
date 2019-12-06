@@ -17,7 +17,7 @@ export class AuthComponent implements OnDestroy {
   public isLoading = false;
   public error: string = null;
   public closeSub: Subscription;
-  @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective; // By passing in a class to ViewChild, it will find the first instance of said class.
+  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective; // By passing in a class to ViewChild, it will find the first instance of said class.
 
   constructor(private authService: AuthService,
               private router: Router,
@@ -84,5 +84,4 @@ export class AuthComponent implements OnDestroy {
       this.closeSub.unsubscribe();
     }
   }
-// test
 }
