@@ -70,8 +70,7 @@
 
       <div class="row">
         <div class="col-xs-12" formArrayName="ingredients">
-          <div class="row" [formGroupName]="i" *ngFor="let ingredientCtrl of
-            getControls('ingredients'); let i= index;" style="margin-top:
+          <div class="row" [formGroupName]="i" *ngFor="let ingredientCtrl of ingredientsControls; let i= index;" style="margin-top:
             .8rem;">
             <div class="col-xs-8">
               <input
