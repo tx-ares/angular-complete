@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RecipesRouterModule } from './recipes-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
+import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 
 
 @NgModule({
@@ -16,7 +17,9 @@ import { SharedModule } from 'app/shared/shared.module';
     RecipeListComponent,
     RecipeItemComponent,
     RecipeStartComponent,
-    RecipeDetailComponent
+    RecipeDetailComponent,
+    RecipeStartComponent,
+    RecipeEditComponent
   ],
   imports: [ // Remember that in feature modules, directive modules like these must be included in the feature module, and not the AppModule.  Services are an exception since these can be instantiated once as a singleton service and be available to the entire application.
     ReactiveFormsModule,
