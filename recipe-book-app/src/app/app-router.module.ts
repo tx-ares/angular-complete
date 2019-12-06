@@ -1,4 +1,4 @@
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { NgModule } from '@angular/core';
 
  const appRoutes: Routes = [
@@ -10,8 +10,9 @@ import { NgModule } from '@angular/core';
 
 @NgModule({ // This decorator changes this typescript class into an Angular Module.
   imports: [
-    RouterModule.forRoot(appRoutes) // forRoot will register the routes to the root of the application.
+    RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }) // forRoot will register the routes to the root of the application.
     // Other things can be registered this way, but routes must be registered here.
+    // Setting PreloadAllModules will tell angular to load the lazy loaded modules as soon as possible .  This will improve performance.
   ],
   exports: [RouterModule]
 })
