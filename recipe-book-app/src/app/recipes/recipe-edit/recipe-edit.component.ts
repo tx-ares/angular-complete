@@ -16,7 +16,7 @@ export class RecipeEditComponent implements OnInit {
   public recipeForm: FormGroup;
 
   get ingredientsControls() {
-    return (this.recipeForm.get('ingredients') as FormArray).controls;
+    return (this.recipeForm.get('ingredients') as FormArray).controls; // This is just providing type of ingredients from recipeForm for the template.. this is needed for additional template checks made when using AoT compilation mode.
   }
 
   constructor(private route: ActivatedRoute,
