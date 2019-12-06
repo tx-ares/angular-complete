@@ -13,6 +13,7 @@ import { NgModule } from '@angular/core';
     RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }) // forRoot will register the routes to the root of the application.
     // Other things can be registered this way, but routes must be registered here.
     // Setting PreloadAllModules will tell angular to load the lazy loaded modules as soon as possible .  This will improve performance.
+    // it is also possible to create your own preloadingStrategy.
   ],
   exports: [RouterModule]
 })
