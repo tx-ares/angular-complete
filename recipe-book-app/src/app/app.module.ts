@@ -8,10 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { AppRouterModule } from './app-router.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AlertComponent } from './shared/alert/alert.component';
-import { ShoppingListModule } from './shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
-import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [ // Important thing to know is that Components, Pipes, Directives, etc. can only be declared ONCE in the ENTIRE APPLICATION. Make sure this is the case when using multiple feature modules.
@@ -24,8 +22,6 @@ import { AuthModule } from './auth/auth.module';
     ReactiveFormsModule,
     HttpClientModule,
     AppRouterModule,
-    ShoppingListModule,
-    AuthModule,
     SharedModule,
     CoreModule
   ],
