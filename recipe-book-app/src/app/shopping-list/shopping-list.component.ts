@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
+import { LoggingService } from 'app/logging.service';
 
 @Component({
   selector: 'app-shopping-list',
@@ -11,8 +12,10 @@ import { ShoppingListService } from './shopping-list.service';
 export class ShoppingListComponent implements OnInit {
   ingredients: Ingredient[];
 
-  constructor(private shoppingListService: ShoppingListService) { }
-  
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private loggingService: LoggingService) { }
+
   public onEditItem(index: number): void {
     this.shoppingListService.startedEditing.next(index);
   }
@@ -25,6 +28,7 @@ export class ShoppingListComponent implements OnInit {
           this.ingredients = ingredients;
         }
       );
+    this.loggingService.printLog('Hi from ShoppingListComponent ngOnInit!');
   }
 
 
