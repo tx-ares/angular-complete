@@ -21,6 +21,8 @@ export function shoppingListReducer(
         ...state,
         ingredients: [...state.ingredients, action.payload]
       }; // Add old state object to this object, effectively making a copy.
+    default:
+      return state;
   }
 
 }
