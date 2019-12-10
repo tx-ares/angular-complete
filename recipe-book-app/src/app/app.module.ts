@@ -10,6 +10,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AlertComponent } from './shared/alert/alert.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
+import { StoreModule } from '@ngrx/store';
+import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 
 @NgModule({
   declarations: [ // Important thing to know is that Components, Pipes, Directives, etc. can only be declared ONCE in the ENTIRE APPLICATION. Make sure this is the case when using multiple feature modules.
@@ -21,6 +23,7 @@ import { CoreModule } from './core.module';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
+    StoreModule.forRoot({ shoppingList: shoppingListReducer }), // When importing Store, it must have all reducers that will be used in the .forRoot() method.
     AppRouterModule,
     SharedModule,
     CoreModule
