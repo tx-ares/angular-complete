@@ -31,7 +31,7 @@ export class ShoppingListEditComponent {
       this.shoppingListService.updateIngredient(this.editedItemIndex, newIngredient)
     } else {
       // this.shoppingListService.addIngredient(newIngredient); // Previously used in non-ngrx approach. ( no State / store )
-      this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient))
+      this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
     }
 
     this.editMode = false;
