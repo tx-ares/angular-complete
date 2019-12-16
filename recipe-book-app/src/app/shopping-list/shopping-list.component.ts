@@ -5,6 +5,8 @@ import { ShoppingListService } from './shopping-list.service';
 import { LoggingService } from 'app/logging.service';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import * as fromShoppingList from './store/shopping-list.reducer';
+
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
@@ -16,7 +18,7 @@ export class ShoppingListComponent implements OnInit {
   constructor(
     private shoppingListService: ShoppingListService,
     private loggingService: LoggingService,
-    private store: Store<{ shoppingList: { ingredients: Ingredient[] } }>) // Store must be defined as reducer map object, which contains the reducer as a key and its return value as a value.
+    private store: Store<fromShoppingList.AppState>) // Store must be defined as reducer map object, which contains the reducer as a key and its return value as a value.
   { }
 
   public onEditItem(index: number): void {
