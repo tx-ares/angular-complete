@@ -57,6 +57,18 @@ export function shoppingListReducer(
           return index !== action.payload; // payload is the index.
         })
       };
+    case ShoppingListActions.START_EDIT:
+      return {
+        ...state,
+        editedIngredientIndex: action.payload,
+        editedIngredient: { ...state.ingredients[action.payload] } // spread operator creates a copy here.
+      };
+    case ShoppingListActions.STOP_EDIT:
+      return {
+        ...state,
+        editedIngredient: null,
+        editedIngredientIndex: -1
+      };
     default:
       return state;
   }
