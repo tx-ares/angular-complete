@@ -22,7 +22,7 @@ const initialState: State = {
   editedIngredientIndex: -1 // We need an invalid index, kind of like setting it a null value.
 };
 
-export function shoppingListReducer(
+export function shoppingListReducer( // Reducers should only use synchronus code, no async calls , and take in data, and return data.
   state = initialState,  // note that if state input is not provided, it will default to initialState variable.
   action: ShoppingListActions.ShoppingListActions // Its important to use the correct type so that we have access to the payload ( or any other properties we define in the ShoppingListActions class. )
 ) { // Reducer will handle state updates by creating a copy of it then making changes to the copy, remember that STORE is IMMUTABLE.
