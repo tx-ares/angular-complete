@@ -3,6 +3,8 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, UrlTr
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 import { map, take } from 'rxjs/operators';
+import * as fromApp from '../store/app.reducer';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +13,19 @@ export class AuthGuardService implements CanActivate {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private store: Store<fromApp.AppState>
   ) { }
 
   public canActivate(
     route: ActivatedRouteSnapshot, router: RouterStateSnapshot
     ): boolean | Promise<boolean | UrlTree> | Observable<boolean | UrlTree> {
-      return this.authService.user.pipe(
+      // return this.authService.user.pipe(
+      return this.store.select('auth').pipe(
         take(1),
+        map(authState => { // So now that we're retrieving our user from store / app state, we need to map the correct observable, which is the user object in store.
+          return authState.user;
+        }),
         map(
           user => {
 
