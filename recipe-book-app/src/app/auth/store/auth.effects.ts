@@ -30,13 +30,21 @@ export class AuthEffects { // Effect classes are simply used to house additional
           returnSecureToken: true
         }
       ).pipe(
+        map(resData => {
+          const expirationDate = new Date(
+            new Date().getTime() + +resData.expiresIn * 1000  // Date().getTime() will return the current time stamp in milliseconds.  Adding a + sign infront of a variable will change it to number type if possible.
+          );
+          return of(new AuthActions.Login({
+            email: resData.email,
+            userId: resData.localId,
+            token: resData.idToken,
+            expirationDate: expirationDate
+          }));
+        }),
         catchError(error => {
           // Since we are catching the error from within the chain, this return value must not be an error object, so that the rest of the chain will complete.
-          of();
+          return of();
         }),
-        map(resData => {
-          of();
-        })
       );
     })
   );
@@ -44,7 +52,7 @@ export class AuthEffects { // Effect classes are simply used to house additional
   constructor(
     private actions$: Actions,
     private http: HttpClient
-    ) { // The $ syntax is just a recommended method to distinguish that this property is an observable.  Totally optional.
+  ) { // The $ syntax is just a recommended method to distinguish that this property is an observable.  Totally optional.
 
   }
 }
