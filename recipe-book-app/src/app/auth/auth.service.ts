@@ -23,7 +23,7 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
-  public user = new BehaviorSubject<User>(null);
+  // public user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
 
   constructor(
@@ -148,7 +148,7 @@ export class AuthService {
   }
 
   private handleAuth(email: string, userId: string, token: string, expiresIn: number) {
-    console.log(email, userId, token)
+    console.log(email, userId, token);
     const expirationDate = new Date(
       new Date().getTime() + +expiresIn * 1000  // Date().getTime() will return the current time stamp in milliseconds.  Adding a + sign infront of a variable will change it to number type if possible.
     );
