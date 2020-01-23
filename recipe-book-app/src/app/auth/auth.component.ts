@@ -5,6 +5,10 @@ import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertComponent } from 'app/shared/alert/alert.component';
 import { PlaceholderDirective } from 'app/shared/placeholder/placeholder.directive';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from '../store/app.reducer';
+import * as AuthActions from './store/auth.actions';
 
 @Component({
   selector: 'app-auth',
@@ -21,7 +25,8 @@ export class AuthComponent implements OnDestroy {
 
   constructor(private authService: AuthService,
               private router: Router,
-              private componentFactoryResolver: ComponentFactoryResolver) { }
+              private componentFactoryResolver: ComponentFactoryResolver,
+              private store: Store<fromApp.AppState>) { }
 
   public onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
@@ -41,7 +46,8 @@ export class AuthComponent implements OnDestroy {
     this.isLoading = true;
 
     if (this.isLoginMode) {
-      authObs = this.authService.login(email, password);
+      // authObs = this.authService.login(email, password);
+      this.store.dispatch(new AuthActions.LoginStart({ email: email, password: password })); // Since this does not return an obseravable certain things like router navigation won't work because it will no longer be notified when this is completed.
     } else {
       authObs = this.authService.signUp(email, password);
     }
