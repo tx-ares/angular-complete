@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../../environments/environment';
 import { of } from 'rxjs';
+import { Injectable } from '@angular/core';
 
 export interface AuthResponseData {
   kind: string;
@@ -17,6 +18,7 @@ export interface AuthResponseData {
   registered?: boolean;
 };
 
+@Injectable()
 export class AuthEffects { // Effect classes are simply used to house additional logic to be ran when a specific action is dispatched.  It can also be used to dispatch more actions.
   @Effect()
   authLogin = this.actions$.pipe(
