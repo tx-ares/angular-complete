@@ -3,10 +3,12 @@ import * as AuthActions from "./auth.actions";
 
 export interface State {
   user: User;
+  authError: string;
 }
 
 const initialState: State = {
-  user: null
+  user: null,
+  authError: null
 }
 
 export function authReducer(
@@ -23,12 +25,23 @@ export function authReducer(
           action.payload.expirationDate);
     return {
       ...state, // Always copy previous state.
+      authError: null,
       user: loggedInUser // Set user as the new user created above.
     }
     case AuthActions.LOGOUT:
       return {
-        ...state.user,
+        ...state,
         user: null
+      }
+    case AuthActions.LOGIN_START:
+      return {
+        ...state,
+        authError: null
+      }
+    case AuthActions.LOGIN_FAIL:
+      return {
+        user: null,
+        authError: action.payload
       }
     default:
       return state;
