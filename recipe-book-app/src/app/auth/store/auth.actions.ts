@@ -38,4 +38,4 @@ export class SignupStart implements Action {
   constructor(public payload: {email: string, password: string}) { }
 }
 
-export type AuthActions = AuthSuccess | AuthFail |Logout | LoginStart | SignupStart00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000; // Typescript allows union classes.  This means that AuthActions will contain both classes. ( separated by pipe | symbol. )
+export type AuthActions = AuthSuccess | AuthFail |Logout | LoginStart | SignupStart; // Typescript allows union classes.  This means that AuthActions will contain both classes. ( separated by pipe | symbol. )
