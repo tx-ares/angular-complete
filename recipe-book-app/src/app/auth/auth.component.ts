@@ -41,28 +41,11 @@ export class AuthComponent implements OnDestroy, OnInit {
     const email = authForm.value.email;
     const password = authForm.value.password;
 
-    let authObs: Observable<AuthResponseData>;
-
-    this.isLoading = true;
-
     if (this.isLoginMode) {
-      // authObs = this.authService.login(email, password);
       this.store.dispatch(new AuthActions.LoginStart({ email: email, password: password })); // Since this does not return an obseravable certain things like router navigation won't work because it will no longer be notified when this is completed.
     } else {
-      authObs = this.authService.signUp(email, password);
+      this.store.dispatch(new AuthActions.SignupStart({ email: email, password: password }))
     }
-
-    // authObs.subscribe(
-    //   resp => {
-    //     console.log(resp);
-    //     this.isLoading = false;
-    //     this.router.navigate(['/recipes']); // Use programmatic routing once user is successfully authenticated
-    //   },
-    //   errorMessage => {
-    //     this.showErrorAlert(errorMessage);
-    //     this.isLoading = false;
-    //   }
-    // );
 
     authForm.reset();
   }
