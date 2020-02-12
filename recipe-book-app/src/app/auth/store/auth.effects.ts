@@ -22,6 +22,11 @@ export interface AuthResponseData {
 @Injectable()
 export class AuthEffects { // Effect classes are simply used to house additional logic to be ran when a specific action is dispatched.  It can also be used to dispatch more actions.
   @Effect()
+  authSignup = this.actions$.pipe(
+    ofType(AuthActions.SIGNUP_START)
+  )
+
+  @Effect()
   authLogin = this.actions$.pipe(
     ofType(AuthActions.LOGIN_START), // An operator for obserables used to filter for a value.
     switchMap((authData: AuthActions.LoginStart) => {
@@ -37,7 +42,7 @@ export class AuthEffects { // Effect classes are simply used to house additional
           const expirationDate = new Date(
             new Date().getTime() + +resData.expiresIn * 1000  // Date().getTime() will return the current time stamp in milliseconds.  Adding a + sign infront of a variable will change it to number type if possible.
           );
-          return new AuthActions.Login({
+          return new AuthActions.AuthSuccess({
             email: resData.email,
             userId: resData.localId,
             token: resData.idToken,
@@ -50,7 +55,7 @@ export class AuthEffects { // Effect classes are simply used to house additional
           let errorMessage = 'An unknown error occurred.';
 
           if (!errorResponse.error || !errorResponse.error.error) {
-            return of(new AuthActions.LoginFail(errorMessage))
+            return of(new AuthActions.AuthFail(errorMessage))
           }
           switch (errorResponse.error.error.message) {
             case 'EMAIL_EXISTS':
@@ -64,7 +69,7 @@ export class AuthEffects { // Effect classes are simply used to house additional
               break;
           }
 
-          return of(new AuthActions.LoginFail(errorMessage));
+          return of(new AuthActions.AuthFail(errorMessage));
         }),
       );
     })
@@ -72,7 +77,7 @@ export class AuthEffects { // Effect classes are simply used to house additional
 
   @Effect({ dispatch: false }) // You can tell angular that an effect will not dispatch an additional action
   authSuccess = this.actions$.pipe(
-    ofType(AuthActions.LOGIN),
+    ofType(AuthActions.AUTH_SUCCESS),
     tap(() => {
       this.router.navigate(['/']);
     })

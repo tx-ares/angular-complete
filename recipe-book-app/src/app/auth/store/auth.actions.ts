@@ -1,16 +1,25 @@
 import { Action } from "@ngrx/store";
 
 export const LOGIN_START = '[Auth] LOGIN START';
-export const LOGIN = '[Auth] LOGIN';
 export const LOGOUT = '[Auth] LOGOUT';
-export const LOGIN_FAIL = '[Auth] LOGIN_FAIL';
+export const AUTH_SUCCESS = '[Auth] LOGIN';
+export const AUTH_FAIL = '[Auth] LOGIN_FAIL';
+export const SIGNUP_START = '[Auth] SIGNUP_START';
+export const SIGNUP = '[Auth] SIGNUP';
 
-export class Login implements Action {
-  readonly type = LOGIN;
+
+export class AuthSuccess implements Action {
+  readonly type = AUTH_SUCCESS;
 
   constructor(
     public payload: { email: string, userId: string, token: string, expirationDate: Date }
   ) { }
+}
+
+export class AuthFail implements Action {
+  readonly type = AUTH_FAIL;
+
+  constructor(public payload: string) { }
 }
 
 export class Logout implements Action {
@@ -23,10 +32,10 @@ export class LoginStart implements Action {
   constructor(public payload: {email: string, password: string}) { }
 }
 
-export class LoginFail implements Action {
-  readonly type = LOGIN_FAIL;
+export class SignupStart implements Action {
+  readonly type = SIGNUP_START;
 
-  constructor(public payload: string) { }
+  constructor(public payload: {email: string, password: string}) { }
 }
 
-export type AuthActions = Login | Logout | LoginStart | LoginFail;  // Typescript allows union classes.  This means that AuthActions will contain both classes. ( separated by pipe | symbol. )
+export type AuthActions = AuthSuccess | AuthFail |Logout | LoginStart | SignupStart00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000; // Typescript allows union classes.  This means that AuthActions will contain both classes. ( separated by pipe | symbol. )
