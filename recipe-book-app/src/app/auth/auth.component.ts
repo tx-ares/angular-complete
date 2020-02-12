@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ComponentFactoryResolver, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService, AuthResponseData } from './auth.service';
 import { Observable, Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import * as AuthActions from './store/auth.actions';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnDestroy {
+export class AuthComponent implements OnDestroy, OnInit {
 
   public isLoginMode = true;
   public isLoading = false;
@@ -52,17 +52,17 @@ export class AuthComponent implements OnDestroy {
       authObs = this.authService.signUp(email, password);
     }
 
-    authObs.subscribe(
-      resp => {
-        console.log(resp);
-        this.isLoading = false;
-        this.router.navigate(['/recipes']); // Use programmatic routing once user is successfully authenticated
-      },
-      errorMessage => {
-        this.showErrorAlert(errorMessage);
-        this.isLoading = false;
-      }
-    );
+    // authObs.subscribe(
+    //   resp => {
+    //     console.log(resp);
+    //     this.isLoading = false;
+    //     this.router.navigate(['/recipes']); // Use programmatic routing once user is successfully authenticated
+    //   },
+    //   errorMessage => {
+    //     this.showErrorAlert(errorMessage);
+    //     this.isLoading = false;
+    //   }
+    // );
 
     authForm.reset();
   }
@@ -85,7 +85,14 @@ export class AuthComponent implements OnDestroy {
     });
   }
 
-  public ngOnDestroy() {
+  public ngOnInit(): void {
+    this.store.select('auth').subscribe(authState => {
+      this.isLoading = authState.loading;
+      this.error = authState.authError;
+    });
+  }
+
+  public ngOnDestroy(): void {
     if (this.closeSub) {
       this.closeSub.unsubscribe();
     }

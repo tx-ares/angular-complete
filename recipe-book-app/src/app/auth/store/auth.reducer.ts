@@ -4,11 +4,13 @@ import * as AuthActions from "./auth.actions";
 export interface State {
   user: User;
   authError: string;
+  loading: boolean;
 }
 
 const initialState: State = {
   user: null,
-  authError: null
+  authError: null,
+  loading: false
 }
 
 export function authReducer(
@@ -26,6 +28,7 @@ export function authReducer(
     return {
       ...state, // Always copy previous state.
       authError: null,
+      loading: false,
       user: loggedInUser // Set user as the new user created above.
     }
     case AuthActions.LOGOUT:
@@ -36,11 +39,13 @@ export function authReducer(
     case AuthActions.LOGIN_START:
       return {
         ...state,
+        loading: true,
         authError: null
       }
     case AuthActions.LOGIN_FAIL:
       return {
         user: null,
+        loading: false,
         authError: action.payload
       }
     default:
