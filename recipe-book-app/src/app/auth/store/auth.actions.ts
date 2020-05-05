@@ -6,6 +6,7 @@ export const AUTH_SUCCESS = '[Auth] LOGIN';
 export const AUTH_FAIL = '[Auth] LOGIN_FAIL';
 export const SIGNUP_START = '[Auth] SIGNUP_START';
 export const CLEAR_ERROR = '[Auth] CLEAR_ERROR'
+export const AUTO_LOGIN = '[Auth] Auto Login';
 export const SIGNUP = '[Auth] SIGNUP';
 
 
@@ -43,4 +44,8 @@ export class ClearError implements Action {
   readonly type = CLEAR_ERROR;
 }
 
-export type AuthActions = AuthSuccess | AuthFail |Logout | LoginStart | SignupStart | ClearError; // Typescript allows union classes.  This means that AuthActions will contain both classes. ( separated by pipe | symbol. )
+export class AutoLogin implements Action {
+  readonly type = AUTO_LOGIN;
+}
+
+export type AuthActions = AuthSuccess | AuthFail |Logout | LoginStart | SignupStart | ClearError | AutoLogin; // Typescript allows union classes.  This means that AuthActions will contain both classes. ( separated by pipe | symbol. )
