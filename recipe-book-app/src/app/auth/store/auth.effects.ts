@@ -111,8 +111,8 @@ export class AuthEffects { // Effect classes are simply used to house additional
   );
 
   @Effect({ dispatch: false }) // You can tell angular that an effect will not dispatch an additional action
-  authSuccess = this.actions$.pipe(
-    ofType(AuthActions.AUTH_SUCCESS),
+  authRedirect = this.actions$.pipe(
+    ofType(AuthActions.AUTH_SUCCESS, AuthActions.LOGOUT),
     tap(() => {
       this.router.navigate(['/']);
     })
