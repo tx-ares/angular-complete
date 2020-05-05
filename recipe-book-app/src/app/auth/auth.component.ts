@@ -21,6 +21,8 @@ export class AuthComponent implements OnDestroy, OnInit {
   public isLoading = false;
   public error: string = null;
   public closeSub: Subscription;
+  public storeSub: Subscription;
+
   @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective; // By passing in a class to ViewChild, it will find the first instance of said class.
 
   constructor(private authService: AuthService,
@@ -51,7 +53,7 @@ export class AuthComponent implements OnDestroy, OnInit {
   }
 
   public onHandleError() {
-    this.error = null;
+    this.store.dispatch(new AuthActions.ClearError());
   }
 
   private showErrorAlert(message: string) {
@@ -81,6 +83,10 @@ export class AuthComponent implements OnDestroy, OnInit {
   public ngOnDestroy(): void {
     if (this.closeSub) {
       this.closeSub.unsubscribe();
+    }
+
+    if (this.storeSub) {
+      this.storeSub.unsubscribe();
     }
   }
 }
